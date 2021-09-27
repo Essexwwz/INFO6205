@@ -11,9 +11,9 @@ import static org.junit.Assert.assertEquals;
 @SuppressWarnings("ALL")
 public class BenchmarkTest {
 
-    int pre = 0;
+    int pre = 4;
     int run = 0;
-    int post = 0;
+    int post = 2;
 
     @Test // Slow
     public void testWaitPeriods() throws Exception {

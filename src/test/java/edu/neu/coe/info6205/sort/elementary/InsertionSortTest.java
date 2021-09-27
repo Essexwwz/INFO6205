@@ -56,6 +56,7 @@ public class InsertionSortTest {
         GenericSort<Integer> sorter = new InsertionSort<Integer>(helper);
         Integer[] ys = sorter.sort(xs);
         assertTrue(helper.sorted(ys));
+
         System.out.println(sorter.toString());
     }
 

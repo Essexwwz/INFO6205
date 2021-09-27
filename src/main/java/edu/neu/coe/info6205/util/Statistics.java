@@ -28,6 +28,7 @@ public class Statistics {
     }
 
     public double mean() {
+
         return total() / count;
     }
 
@@ -37,6 +38,7 @@ public class Statistics {
             double variance = 0;
             for (int i = 0; i < count; i++) variance += (doubles[i] - mean) * (doubles[i] - mean);
             stdDev = Math.sqrt(variance / count);
+
         }
         return stdDev;
     }
