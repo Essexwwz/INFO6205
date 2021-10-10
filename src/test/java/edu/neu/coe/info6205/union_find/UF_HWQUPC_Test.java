@@ -127,6 +127,7 @@ public class UF_HWQUPC_Test {
         assertEquals(0, h.find(2));
         assertEquals(0, h.find(3));
         assertEquals(0, h.find(4));
+
         assertEquals(0, h.find(5));
         final PrivateMethodTester tester = new PrivateMethodTester(h);
         assertEquals(3, tester.invokePrivate("getParent", 4));
@@ -177,7 +178,7 @@ public class UF_HWQUPC_Test {
     @Test
     public void testConnected01() {
         Connections h = new UF_HWQUPC(10);
-//        h.show();
+        //h.show();
         assertFalse(h.isConnected(0, 1));
     }
 }

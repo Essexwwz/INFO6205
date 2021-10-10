@@ -1,10 +1,3 @@
-/**
- * Original code:
- * Copyright © 2000–2017, Robert Sedgewick and Kevin Wayne.
- * <p>
- * Modifications:
- * Copyright (c) 2017. Phasmid Software
- */
 package edu.neu.coe.info6205.union_find;
 
 import java.util.Arrays;
@@ -38,6 +31,7 @@ public class UF_HWQUPC implements UF {
         height = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;
+
             height[i] = 1;
         }
         this.pathCompression = pathCompression;
@@ -56,11 +50,7 @@ public class UF_HWQUPC implements UF {
         this(n, true);
     }
 
-    public void show() {
-        for (int i = 0; i < parent.length; i++) {
-            System.out.printf("%d: %d, %d\n", i, parent[i], height[i]);
-        }
-    }
+
 
     /**
      * Returns the number of components.
@@ -79,10 +69,33 @@ public class UF_HWQUPC implements UF {
      * @throws IllegalArgumentException unless {@code 0 <= p < n}
      */
     public int find(int p) {
-        validate(p);
-        int root = p;
+
+        if(!pathCompression) {
+            validate(p);
+            while (p != parent[p])
+                p = parent[p];
+            return p;
+        }
+
+        else {
+            /*
+            validate(p);
+            int root = p;
+            while (root != parent[root])
+                root = parent[root];
+
+            while (p != root) {
+                int newp = parent[p];
+                parent[p] = root;
+                p = newp;
+            }
+            */
+            doPathCompression(p);
+            return parent[p];
+
+        }
         // TO BE IMPLEMENTED
-        return root;
+
     }
 
     /**
@@ -134,8 +147,13 @@ public class UF_HWQUPC implements UF {
                 "\n  path compression? " + pathCompression +
                 "\n  parents: " + Arrays.toString(parent) +
                 "\n  heights: " + Arrays.toString(height);
-    }
 
+    }
+    public void show() {
+        for (int i = 0; i < parent.length; i++) {
+            System.out.printf("%d: %d, %d\n", i, parent[i], height[i]);
+        }
+    }
     // validate that p is a valid index
     private void validate(int p) {
         int n = parent.length;
@@ -159,6 +177,7 @@ public class UF_HWQUPC implements UF {
      * @return the parent of the component
      */
     private int getParent(int i) {
+
         return parent[i];
     }
 
@@ -168,13 +187,30 @@ public class UF_HWQUPC implements UF {
     private boolean pathCompression;
 
     private void mergeComponents(int i, int j) {
-        // TO BE IMPLEMENTED make shorter root point to taller one
+        if(height[i] < height[j]){
+            parent[i] = j;
+            height[j] += height[i];
+        }else{
+            parent[j] = i;
+            height[i] += height[j];
+        }// TO BE IMPLEMENTED make shorter root point to taller one
     }
 
     /**
      * This implements the single-pass path-halving mechanism of path compression
      */
-    private void doPathCompression(int i) {
-        // TO BE IMPLEMENTED update parent to value of grandparent
-    }
+    private void doPathCompression(int i ) {
+        validate(i);
+        int root = i;
+        while (root != parent[root])
+            root = parent[root];
+
+        while (i != root) {
+            int newp = parent[i];
+            parent[i] = root;
+            i = newp;
+        }
+
+        }// TO BE IMPLEMENTED update parent to value of grandparent
+
 }
