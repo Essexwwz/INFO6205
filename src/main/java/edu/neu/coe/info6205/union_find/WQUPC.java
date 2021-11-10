@@ -53,6 +53,7 @@ public class WQUPC {
      */
     public int find(int p) {
         validate(p);
+        /*
         int root = p;
         while (root != parent[root]) {
             root = parent[root];
@@ -62,7 +63,13 @@ public class WQUPC {
             parent[p] = root;
             p = newp;
         }
-        return root;
+
+         */
+        while (p != parent[p]){
+            parent[p] = parent[parent[p]];
+            p = parent[p];
+        }
+        return p;
     }
 
     // validate that p is a valid index

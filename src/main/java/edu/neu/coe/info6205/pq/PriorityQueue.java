@@ -151,7 +151,6 @@ public class PriorityQueue<K> implements Iterable<K> {
         while (firstChild(i) <= last) {
             int j = firstChild(i);
             if (j < last && unordered(j, j + 1)) j++;
-
             swap(i, j);
             i = j;
         }

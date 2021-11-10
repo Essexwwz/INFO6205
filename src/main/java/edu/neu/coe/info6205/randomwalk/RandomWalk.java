@@ -53,6 +53,7 @@ public class RandomWalk {
         move(ns ? step : 0, ns ? 0 : step);
     }
 
+
     /**
      * Method to compute the distance from the origin (the lamp-post where the drunkard starts) to his current position.
      *
